@@ -18,7 +18,7 @@ function App() {
             target="_blank"
             rel="noreferrer"
           >
-            Explore mockBee
+            Explore mockBee hi
           </a>
           <a
             href="https://mockbee.netlify.app/docs/api/introduction"
