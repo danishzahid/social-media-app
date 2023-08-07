@@ -1,0 +1,79 @@
+.suggestion {
+  background-color: #f7cac9;
+  color: #6c7a89;
+  width: 300px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-left: 0.5px solid #e6ecf0;
+}
+
+.profileInfo {
+  display: flex;
+  align-items: center;
+}
+
+.profileImage {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.logoutButton {
+  background-color: transparent;
+  border: 1px solid #6c7a89;
+  border-radius: 4px;
+  padding: 5px 10px;
+  color: #6c7a89;
+  cursor: pointer;
+}
+
+.suggestedUsers {
+  margin-top: 20px;
+}
+
+.suggestedUsers h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.userCard {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.userImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.userName {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.userUsername {
+  font-size: 12px;
+  color: #5a5a5a;
+}

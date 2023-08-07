@@ -1,0 +1,79 @@
+.navbar {
+  background-color: #6c7a89;
+  color: #f7cac9;
+  width: 300px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 0.5px solid #e6ecf0;
+}
+
+.heading {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.searchBar {
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.searchBar input {
+  width: 80%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f7cac9;
+  color: #5a5a5a;
+  font-size: 14px;
+}
+
+.searchIcon {
+  color: #f7cac9;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.navLinks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navLinks li {
+  margin-bottom: 10px;
+}
+
+.navLinks a {
+  color: #f7cac9;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.newPostButton {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #98dbc6;
+  color: white;
+  cursor: pointer;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.newPostButton i {
+  margin-right: 8px;
+}
+
+.newPostButton:hover {
+  background-color: #5d576b;
+}

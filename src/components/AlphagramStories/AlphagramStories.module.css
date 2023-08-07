@@ -1,0 +1,58 @@
+.alphagramStories {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px;
+  background-color: white;
+  gap: 35px;
+}
+
+.story {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.circle {
+  width: 60px;
+  height: 60px;
+  background-color: #98dbc6;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle p {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+}
+
+.letter {
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .alphagramStories {
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .circle {
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+  }
+
+  .circle p {
+    font-size: 18px;
+  }
+
+  .letter {
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,7 @@
+.savedpostsContainer {
+  margin-left: 320px;
+  margin-right: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
