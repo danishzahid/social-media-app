@@ -13,15 +13,41 @@ import { toast } from "react-toastify";
 
 const PostCard = ({ post }) => {
   const { image, content, likes, _id } = post;
-  console.log(_id);
-  const { likesCount } = likes;
-  console.log(post);
+  console.log(_id, "post id");
+
+  const { likeCount } = likes;
+  console.log(likes, "likes");
+  console.log(likeCount, "likesCount");
+
+  // console.log(post);
 
   const { state, dispatch } = useData();
 
-  console.log(state);
-  console.log(state.savedPosts);
+  // console.log(state);
+  // console.log(state.savedPosts);
 
+  const [expanded, setExpanded] = React.useState(false);
+  const toggleExpanded = () => {
+    setExpanded(!expanded);
+  };
+
+  const isLiked = likes.likeCount > 0;
+
+  const handleLike = () => {
+    if (isLiked) {
+      unlikePost(_id).then((res) => {
+        dispatch({ type: "UNLIKE_POST", payload: res }); // Update liked posts
+        dispatch({ type: "SET_POSTS", payload: res }); // Update all posts
+        toast.error("Post unliked");
+      });
+    } else {
+      likePost(_id).then((res) => {
+        dispatch({ type: "SET_LIKED_POSTS", payload: res }); // Update liked posts
+        dispatch({ type: "SET_POSTS", payload: res }); // Update all posts
+        toast.success("Post liked");
+      });
+    }
+  };
   return (
     <>
       <div className={styles.postCard}>
@@ -29,31 +55,28 @@ const PostCard = ({ post }) => {
           <img src={image} alt="Post" className={styles.image} />
           <span className={styles.editIcon}>Edit</span>
         </div>
-        <div className={styles.caption}>{content}</div>
+        {/* <div className={styles.caption}>{content}</div> */}
+        <div className={styles.caption}>
+          {expanded ? content : content.slice(0, 100)}{" "}
+          {/* Display full content if expanded, or a truncated version */}
+          {content.length > 100 && (
+            <span className={styles.readMore} onClick={toggleExpanded}>
+              {expanded ? "Read Less" : "Read More"}
+            </span>
+          )}
+        </div>
         <div className={styles.icons}>
           {/* <i className={`far fa-heart ${styles.icon}`}></i> */}
-          {state.likedPosts.filter((post) => post._id === _id).length == 0 ? (
+          {isLiked ? (
             <i
-              onClick={() => {
-                likePost(_id).then((res) => {
-                  dispatch({ type: "SET_LIKED_POSTS", payload: res });
-                  dispatch({ type: "SET_POSTS", payload: res });
-                  toast.success("Post liked");
-                  console.log();
-                });
-              }}
-              className={`far fa-heart ${styles.icon}`}
+              onClick={handleLike}
+              className={`fas fa-heart ${styles.icon}`}
+              style={{ color: "red" }}
             ></i>
           ) : (
             <i
-              onClick={() => {
-                unlikePost(_id).then((res) => {
-                  dispatch({ type: "UNLIKE_POST", payload: res });
-                  dispatch({ type: "SET_POSTS", payload: res });
-                  toast.error("Post unliked");
-                });
-              }}
-              className={`fas fa-heart ${styles.icon}`}
+              onClick={handleLike}
+              className={`far fa-heart ${styles.icon}`}
             ></i>
           )}
           {/* <i
@@ -71,7 +94,7 @@ const PostCard = ({ post }) => {
                   toast.error("Post removed from bookmarks");
                 });
               }
-            }}
+            }} 
             className={`far fa-bookmark ${styles.icon}`}
             style={{
               color:
@@ -103,7 +126,7 @@ const PostCard = ({ post }) => {
           )}
           <i className={`far fa-trash-alt ${styles.icon}`}></i>
         </div>
-        <div className={styles.likes}>{likesCount} likes</div>
+        <div className={styles.likes}>{likeCount} likes</div>
       </div>
     </>
   );

@@ -10,6 +10,7 @@ export const Authform = () => {
   const [active, setActive] = React.useState(false);
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
+  const [userName, setUserName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
@@ -23,6 +24,7 @@ export const Authform = () => {
         body: JSON.stringify({
           firstName,
           lastName,
+          userName,
           email,
           password,
         }),
@@ -48,8 +50,28 @@ export const Authform = () => {
     }
   };
 
-  const loginHandler = () => {
-    console.log("login handler");
+  const loginHandler = async () => {
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userName,
+          password,
+        }),
+      });
+      const responseData = await response.json();
+      console.log(responseData);
+      setUser({
+        user: responseData.foundUser,
+        token: responseData.encodedToken,
+      });
+      navigate("/feed", { replace: true });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const authHandler = (active) => {
@@ -57,6 +79,30 @@ export const Authform = () => {
       signupHandler();
     } else {
       loginHandler();
+    }
+  };
+
+  const guestLoginHandler = async () => {
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: "danishzahid",
+          password: "danishZahid123",
+        }),
+      });
+      const responseData = await response.json();
+      console.log(responseData);
+      setUser({
+        user: responseData.foundUser,
+        token: responseData.encodedToken,
+      });
+      navigate("/feed", { replace: true });
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -91,16 +137,27 @@ export const Authform = () => {
               placeholder="Enter last name"
             />
           </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="email">Email:</label>
+            <input
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              type="email"
+              id="email"
+              placeholder="Enter your email"
+            />
+          </div>
         </>
       )}
+
       <div className={styles.formGroup}>
-        <label htmlFor="email">Email:</label>
+        <label htmlFor="userName">User Name:</label>
         <input
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-          type="email"
-          id="email"
-          placeholder="Enter your email"
+          onChange={(e) => setUserName(e.target.value)}
+          value={userName}
+          type="userName"
+          id="userName"
+          placeholder="Enter user name"
         />
       </div>
       <div className={styles.formGroup}>
@@ -116,9 +173,15 @@ export const Authform = () => {
       <button type="submit" className={styles.loginButton}>
         {active ? "Sign up" : "Login"}
       </button>
-      <button type="button" className={styles.guestLoginButton}>
-        Login as Guest
-      </button>
+      {!active && (
+        <button
+          type="button"
+          className={styles.guestLoginButton}
+          onClick={guestLoginHandler}
+        >
+          Login as Guest
+        </button>
+      )}
       <p className={styles.signupLink}>
         {active ? "Already have an account?" : "New user?"}{" "}
         <Link

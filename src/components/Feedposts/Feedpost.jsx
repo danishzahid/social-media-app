@@ -11,7 +11,7 @@ import { useData } from "../../contexts/DataContext";
 export const Feedposts = () => {
   const { state, dispatch } = useData();
   const { posts } = state;
-  console.log(posts);
+  // console.log(posts);
 
   // const fetchedPosts = await fetchPosts();
 

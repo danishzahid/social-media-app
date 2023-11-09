@@ -106,3 +106,13 @@ export const unlikePost = async (postId) => {
     console.log(err);
   }
 };
+
+export const fetchUsers = async () => {
+  try {
+    const response = await fetch("/api/users");
+    const data = await response.json();
+    return data.users;
+  } catch (err) {
+    console.log(err);
+  }
+};

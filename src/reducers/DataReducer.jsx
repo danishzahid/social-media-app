@@ -2,6 +2,7 @@ export const initialState = {
   posts: [],
   savedPosts: [],
   likedPosts: [],
+  users: [],
 };
 
 export const DataReducer = (state, action) => {
@@ -32,6 +33,12 @@ export const DataReducer = (state, action) => {
         ...state,
         likedPosts: action.payload,
       };
+    case "SET_USERS":
+      return {
+        ...state,
+        users: action.payload,
+      };
+
     default:
       return state;
   }
